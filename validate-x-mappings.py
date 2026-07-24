@@ -63,9 +63,7 @@ def load_context_namespaces(version_dir: Path) -> set[str]:
     return set(context.keys())
 
 
-def validate_mapping_entry(
-    entry: object, vocab: str, valid_namespaces: set[str]
-) -> list[str]:
+def validate_mapping_entry(entry: object, vocab: str, valid_namespaces: set[str]) -> list[str]:
     """Validate a single mapping entry against the meta-schema rules.
 
     Args:
