@@ -1,20 +1,21 @@
-#!/usr/bin/env python3
 """Generate a simple HTML mapping matrix for the QUADRIGA schema."""
 
+from __future__ import annotations
+
 import json
-import os
 import sys
 from pathlib import Path
+from typing import Any
 
 
-def load_schemas(version_dir):
+def load_schemas(version_dir: str | Path) -> tuple[list, list, dict]:
     """Load all JSON schema files, walk the schema tree in canonical order."""
     version = Path(version_dir)
     cache = {}  # filename -> parsed json
 
-    def get_schema(filename):
+    def get_schema(filename: str | Path) -> dict | Any:
         if filename not in cache:
-            with open(version / filename) as fh:
+            with (version / filename).open() as fh:
                 cache[filename] = json.load(fh)
         return cache[filename]
 
@@ -26,13 +27,13 @@ def load_schemas(version_dir):
     root = get_schema("schema.json")
     context = root.get("@context", {})
 
-    def collect_mappings(xm):
+    def collect_mappings(xm: dict | None) -> None:
         if xm is not None:
             for k in xm:
                 if not k.startswith("$"):
                     mapped_schemas.add(k)
 
-    def walk(filename, depth=0):
+    def walk(filename: str, depth: int = 0) -> None:
         """Recursively walk schema following $ref and properties in order."""
         if filename in visited:
             return
@@ -50,7 +51,7 @@ def load_schemas(version_dir):
             walk(data["$ref"], depth + 1)
 
         # If it has properties, walk them in definition order
-        def collect_refs(obj):
+        def collect_refs(obj: dict | list) -> list:
             """Recursively collect all $ref values from a JSON schema node."""
             refs = []
             if isinstance(obj, dict):
@@ -130,17 +131,19 @@ def load_schemas(version_dir):
     return rows, ordered, context
 
 
-def html_escape(text):
+def html_escape(text: str) -> str:
     """Escape HTML special characters."""
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    return (
+        text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    )
 
 
-def resolve_uri(target, context):
+def resolve_uri(target: str, context: dict) -> str:
     """Resolve a prefixed target (e.g. dc:title) to a full URI using @context."""
     if not target:
         return ""
     # Already a full URI
-    if target.startswith("http://") or target.startswith("https://"):
+    if target.startswith(("http://", "https://")):
         return target
     # Try to resolve prefix
     if ":" in target:
@@ -151,14 +154,14 @@ def resolve_uri(target, context):
     return ""
 
 
-def tooltip_icon(comment):
+def tooltip_icon(comment: str) -> str:
     """Return a tooltip icon span if comment is present, else empty string."""
     if not comment:
         return ""
     return f' <span class="tip" data-tip="{html_escape(comment)}">ⓘ</span>'
 
 
-def format_sub_cell(entry, context):
+def format_sub_cell(entry: dict, context: dict) -> str:
     """Format a single mapping entry as a sub-cell div. Returns HTML string."""
     relation = entry.get("relation", "")
     target = entry.get("target", "")
@@ -179,7 +182,7 @@ def format_sub_cell(entry, context):
     return f'<div class="sub-cell {css_class}">{content}</div>'
 
 
-def cell_content(xm, schema_name, context):
+def cell_content(xm: dict, schema_name: str, context: dict) -> (str, str):
     """Return (html_content, td_css_class) for a given mapping entry."""
     if xm is None:
         return "", ""
@@ -202,7 +205,7 @@ def cell_content(xm, schema_name, context):
     return "".join(sub_cells), td_css
 
 
-def general_comment(xm):
+def general_comment(xm: dict) -> str:
     """Extract the top-level $comment from x-mappings as a tooltip icon."""
     if xm is None:
         return ""
@@ -210,7 +213,7 @@ def general_comment(xm):
     return tooltip_icon(comment)
 
 
-def generate_html(rows, columns, context):
+def generate_html(rows, columns, context: dict):
     """Generate a self-contained HTML string."""
     # Build table rows with tree guide prefixes
     table_rows = []
@@ -238,7 +241,7 @@ def generate_html(rows, columns, context):
             # Ancestor vertical continuation lines
             for level in range(1, depth):
                 has_future = False
-                for future_name, future_xm, future_depth, future_fn in rows[idx + 1:]:
+                for future_name, future_xm, future_depth, future_fn in rows[idx + 1 :]:
                     if future_depth < level:
                         break
                     if future_depth == level:
@@ -249,7 +252,7 @@ def generate_html(rows, columns, context):
                     lines.append(f'<span class="tree-vline" style="left: {left}px"></span>')
             # Connector at current depth (├ or └)
             is_last = True
-            for future_name, future_xm, future_depth, future_fn in rows[idx + 1:]:
+            for future_name, future_xm, future_depth, future_fn in rows[idx + 1 :]:
                 if future_depth < depth:
                     break
                 if future_depth == depth:
