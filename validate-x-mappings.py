@@ -161,7 +161,7 @@ def validate_x_mappings(x_mappings: object, valid_namespaces: set[str]) -> list[
         return errors
 
     # Check required vocabularies
-    required_vocabs = ["dc", "dcat", "dcterms", "hermes", "lrmi", "modalia", "schema"]
+    required_vocabs = ["amb", "dc", "dcat", "dcterms", "hermes", "lrmi", "modalia", "schema"]
     missing_vocabs = [vocab for vocab in required_vocabs if vocab not in x_mappings]
     errors.extend(f"Missing required vocabulary: {vocab}" for vocab in missing_vocabs)
 
