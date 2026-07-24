@@ -1,12 +1,12 @@
-# QUADRIGA Metadata Schema
+# QUADRIGA Application Profile
 
 [![DOI](https://zenodo.org/badge/1007838017.svg)](https://doi.org/10.5281/zenodo.18184772)
 
 **Table of Contents**
 
-- [QUADRIGA Metadata Schema](#quadriga-metadata-schema)
+- [QUADRIGA Application Profile](#quadriga-application-profile)
   - [About This Repository](#about-this-repository)
-  - [Schema Structure](#schema-structure)
+  - [Structure of the QAP](#structure-of-the-qap)
     - [Canonical order of the elements in `metadata.yml`](#canonical-order-of-the-elements-in-metadatayml)
     - [Diagrams](#diagrams)
   - [Usage](#usage)
@@ -18,16 +18,15 @@
       - [Meta-Schema](#meta-schema)
   - [Documentation](#documentation)
 
+The QUADRIGA Application Profile (QAP) is a JSON-Schema designed for describing
+Open Educational Resources (OER) in German academic contexts. It provides
+structured metadata for learning materials, integrating competency frameworks,
+Bloom's taxonomy, and multilingual support to enable comprehensive resource
+description and discovery. It is used primarily withing QUADRIGA as ground
+truth within a Jupyter Book repository and to allow the Navigator to ingest
+this metadata for retrieval purposes.
 
-The QUADRIGA Metadata Schema is a JSON-Schema designed for describing Open
-Educational Resources (OER) in German academic contexts. It provides structured
-metadata for learning materials, integrating competency frameworks, Bloom's
-taxonomy, and multilingual support to enable comprehensive resource description
-and discovery. It is used primarily withing QUADRIGA as ground truth within a
-Jupyter Book repository and to allow the Navigator to ingest this metadata for
-retrieval purposes.
-
-The schema emphasizes semantic web compatibility through [Dublin
+The application profile emphasizes semantic web compatibility through [Dublin
 Core](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) and
 [Schema.org](https://schema.org/) mappings, while supporting flexible person
 representation, learning objectives tracking, and quality assurance workflows
@@ -35,23 +34,23 @@ tailored for educational content creation and management.
 
 ## About This Repository
 
-This repository contains the complete QUADRIGA schema definition split into
-modular JSON files for maintainability. It features a versioning system with a
-`latest/` symlink pointing to the current version, automated HTML documentation
-generation via GitHub Actions, and deployment to GitHub Pages for easy access
-and reference.
+This repository contains the complete QUADRIGA application profile (QAP)
+definition split into modular JSON files for maintainability. It features a
+versioning system with a `latest/` symlink pointing to the current version,
+automated HTML documentation generation via GitHub Actions, and deployment to
+GitHub Pages for easy access and reference.
 
 **Entry Point:** `schema.json`
 
-**Licensing:** The schema is licensed under CC0 (see `LICENSE-SCHEMA.txt`). Any
+**Licensing:** The QAP is licensed under CC0 (see `LICENSE-QAP.txt`). Any
 code in this repository is licensed under MIT (see `LICENSE-CODE.txt`).
 
-**Archiving:** The schema is archived on Zenodo for long-term preservation and
+**Archiving:** The QAP is archived on Zenodo for long-term preservation and
 citable DOI assignment. Zenodo metadata is maintained in `.zenodo.json`.
 
-## Schema Structure
+## Structure of the QAP
 
-The schema describes educational resources with the following key components:
+The QAP describes educational resources with the following key components:
 
 - **Basic metadata**: Title, description, identifiers, publication dates, and
   versioning
@@ -60,16 +59,18 @@ The schema describes educational resources with the following key components:
 - **Content organization**: Chapter-based structure with individual learning
   objectives
 - **Competency mapping**: Integration with [QUADRIGA data literacy
-  framework](https://doi.org/10.5281/zenodo.14747822), data flow categories, and
-  Bloom's taxonomy
+  framework](https://doi.org/10.5281/zenodo.14747822), data flow categories,
+  and Bloom's taxonomy
 - **Context information**: Discipline, target groups, and research object types
-- **Technical details**: Git repository links and multilingual text support
 
-See [`examples/minimal_metadata.yml`](./examples/minimal_metadata.yml) for a minimal example showing how these
-elements work together to describe an educational resource.
+See [`examples/minimal_metadata.yml`](./examples/minimal_metadata.yml) for a
+minimal example showing how these elements work together to describe an
+educational resource.
 
-### Canonical order of the elements in `metadata.yml`
-The following order of elements is recommended (required fields have an asterisk after their name):
+### Canonical order of the elements in `quadriga-metadata.yml`
+
+The following order of elements is recommended (required fields have an
+asterisk after their name):
 
 ```
 - title*
@@ -132,30 +133,35 @@ The following order of elements is recommended (required fields have an asterisk
 
 ### Diagrams
 
-You can find an approximation of the schema in the form of UML class diagrams <a href="https://quadriga-dk.github.io/quadriga-schema/diagrams/" target="_blank">here</a>.
+You can find an approximation of the QAP in the form of UML class diagrams <a
+href="https://quadriga-dk.github.io/QUADRIGA-Application-Profile/diagrams/"
+target="_blank">here</a>.
 
-To rebuild the diagrams make sure [Docker](https://www.docker.com) (recommended) or [PlantUML](https://plantuml.com) is installed and run `just diagrams`.
+To rebuild the diagrams make sure [Docker](https://www.docker.com)
+(recommended) or [PlantUML](https://plantuml.com) is installed and run `just
+diagrams`.
 
 ## Usage
 
 ### Creating Metadata Files
 
-Create a YAML file following the schema structure. Start with the minimal
-example in [`examples/minimal_metadata.yml`](./examples/minimal_metadata.yml).
+Create a YAML file following the QAP structure. Start with the minimal example
+in [`examples/minimal_metadata.yml`](./examples/minimal_metadata.yml).
 
 You can use `latest` in the schema URL, but in production we recommend picking
-a specific `schema-version` like `v1.0.0`.
+a specific `qap-version` like `v1.0.0`.
 
 ### Vocabulary Mappings (x-mappings)
 
-The QUADRIGA schema uses a custom `x-mappings` extension field to document how
-schema elements (properties or types) map to standard vocabularies. This approach
-co-locates crosswalk mappings directly within the schema definition, making them
-machine-readable and version-controlled alongside the schema itself.
+The QUADRIGA Application Profile uses a custom `x-mappings` extension field in
+the JSON-Schema implementation to document how elements (classes, properties or
+relations) map to select vocabularies and schema. This approach co-locates
+crosswalk mappings directly within the definition of the QAP, making them
+machine-readable and version-controlled alongside the QAP itself.
 
 #### Structure
 
-Each schema element can include an `x-mappings` field that maps to seven target
+Each QAP element can include an `x-mappings` field that maps to seven target
 vocabularies:
 
 ```json
@@ -200,8 +206,9 @@ vocabularies:
 
 #### SKOS Relation Types
 
-Mappings use [SKOS mapping relations](https://www.w3.org/TR/skos-reference/#mapping)
-to indicate semantic relationships:
+Mappings use [SKOS mapping
+relations](https://www.w3.org/TR/skos-reference/#mapping) to indicate semantic
+relationships:
 
 - `skos:exactMatch`: Properties are semantically equivalent
 - `skos:closeMatch`: Properties are closely related but not identical
@@ -209,17 +216,17 @@ to indicate semantic relationships:
 - `skos:narrowMatch`: Target property is narrower in meaning
 - `skos:relatedMatch`: Properties are related but not hierarchically
 
-Use `null` when no appropriate mapping was identified for a vocabulary.
+Use `null` when no appropriate mapping was identified for a given vocabulary.
 
 #### Mapping Matrix
 
-An interactive mapping matrix showing all schema elements mapped against the
+An interactive mapping matrix showing all QAP elements mapped against the
 target vocabularies is available for each schema version:
 
 - **Latest:**
-  [https://quadriga-dk.github.io/quadriga-schema/latest/mapping-matrix.html](https://quadriga-dk.github.io/quadriga-schema/latest/mapping-matrix.html)
+  [https://quadriga-dk.github.io/QUADRIGA-Application-Profile/latest/mapping-matrix.html](https://quadriga-dk.github.io/QUADRIGA-Application-Profile/latest/mapping-matrix.html)
 - **v1.0.0:**
-  [https://quadriga-dk.github.io/quadriga-schema/v1.0.0/mapping-matrix.html](https://quadriga-dk.github.io/quadriga-schema/v1.0.0/mapping-matrix.html)
+  [https://quadriga-dk.github.io/QUADRIGA-Application-Profile/v1.0.0/mapping-matrix.html](https://quadriga-dk.github.io/QUADRIGA-Application-Profile/v1.0.0/mapping-matrix.html)
 
 The matrix is color-coded by SKOS relation type (using a colorblind-safe
 palette), includes links to the schema elements and target vocabulary terms,
@@ -237,9 +244,9 @@ consistent mapping documentation across all schema files.
 ## Documentation
 
 - **HTML Documentation:**
-  [https://quadriga-dk.github.io/quadriga-schema/](https://quadriga-dk.github.io/quadriga-schema/)
+  [https://quadriga-dk.github.io/QUADRIGA-Application-Profile/](https://quadriga-dk.github.io/QUADRIGA-Application-Profile/)
 - **Latest Schema:**
-  [https://quadriga-dk.github.io/quadriga-schema/latest/schema.json](https://quadriga-dk.github.io/quadriga-schema/latest/schema.json)
+  [https://quadriga-dk.github.io/QUADRIGA-Application-Profile/latest/schema.json](https://quadriga-dk.github.io/QUADRIGA-Application-Profile/latest/schema.json)
 
 To build the HTML documentation locally, run `just html` (output will be in
 `_build/`).
@@ -247,9 +254,9 @@ To build the HTML documentation locally, run `just html` (output will be in
 ### Local Development
 
 This project uses [just](https://just.systems) as a command runner. Install it
-with `brew install just` (macOS) or see the
-[installation docs](https://just.systems/man/en/packages.html) for other
-platforms. Run `just --list` to see all available recipes:
+with `brew install just` (macOS) or see the [installation
+docs](https://just.systems/man/en/packages.html) for other platforms. Run `just
+--list` to see all available recipes:
 
 ```
 just validate           # Validate x-mappings in all schema files
