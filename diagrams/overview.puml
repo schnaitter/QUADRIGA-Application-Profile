@@ -6,13 +6,13 @@ skinparam classAttributeIconSize 0
 skinparam backgroundColor transparent
 skinparam classFontSize 12
 skinparam classAttributeFontSize 11
-skinparam padding 3
 skinparam ranksep 40
 skinparam nodesep 25
 skinparam class {
   BackgroundColor white
   BorderColor #cccccc
   AttributeFontColor #000000
+  Padding 3
 }
 skinparam note {
   BackgroundColor #f5f5f5

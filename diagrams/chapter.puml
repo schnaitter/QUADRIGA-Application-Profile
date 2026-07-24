@@ -5,11 +5,11 @@ skinparam classAttributeIconSize 0
 skinparam backgroundColor transparent
 skinparam classFontSize 14
 skinparam classAttributeFontSize 13
-skinparam padding 4
 skinparam class {
   BackgroundColor white
   BorderColor #cccccc
   AttributeFontColor #000000
+  Padding 4
 }
 skinparam note {
   BackgroundColor #f5f5f5
