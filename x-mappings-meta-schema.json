@@ -17,7 +17,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/mapping-entry" },
           "minItems": 1,
-          "description": "Array of mappings to Dublin Core properties"
+          "description": "Array of mappings to Dublin Core elements"
         }
       ],
       "description": "Mapping to Dublin Core Elements (http://purl.org/dc/elements/1.1/)"
@@ -30,7 +30,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/mapping-entry" },
           "minItems": 1,
-          "description": "Array of mappings to DCAT properties"
+          "description": "Array of mappings to DCAT elements"
         }
       ],
       "description": "Mapping to Data Catalog Vocabulary (http://www.w3.org/ns/dcat#)"
@@ -43,7 +43,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/mapping-entry" },
           "minItems": 1,
-          "description": "Array of mappings to DCMI Terms properties"
+          "description": "Array of mappings to DCMI Terms elements"
         }
       ],
       "description": "Mapping to DCMI Metadata Terms (http://purl.org/dc/terms/)"
@@ -56,7 +56,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/mapping-entry" },
           "minItems": 1,
-          "description": "Array of mappings to HERMES OER metadata properties"
+          "description": "Array of mappings to HERMES OER metadata elements"
         }
       ],
       "description": "Mapping to HERMES OER metadata schema (https://zenodo.org/records/17279619)"
@@ -69,7 +69,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/mapping-entry" },
           "minItems": 1,
-          "description": "Array of mappings to LRMI properties"
+          "description": "Array of mappings to LRMI elements"
         }
       ],
       "description": "Mapping to Learning Resource Metadata Initiative terms (http://purl.org/dcx/lrmi-terms/)"
@@ -82,7 +82,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/mapping-entry" },
           "minItems": 1,
-          "description": "Array of mappings to Modalia properties (can reference other ontologies like educor)"
+          "description": "Array of mappings to Modalia elements (can reference other ontologies like educor)"
         }
       ],
       "description": "Mapping to Modalia ontology (https://purl.org/ontology/modalia#) or related ontologies that Modalia reuses"
@@ -95,7 +95,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/mapping-entry" },
           "minItems": 1,
-          "description": "Array of mappings to Schema.org properties"
+          "description": "Array of mappings to Schema.org elements"
         }
       ],
       "description": "Mapping to Schema.org vocabulary (http://schema.org/)"
