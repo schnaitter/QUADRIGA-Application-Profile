@@ -25,6 +25,22 @@
       ],
       "description": "Mapping to Allgemeines Metadatenprofil für Bildungsressourcen (https://dini-ag-kim.github.io/amb/latest/ bzw. https://dini-ag-kim.github.io/amb/draft/) "
     },
+    "datacite": {
+      "oneOf": [
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
+        { "$ref": "#/$defs/mapping-entry" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/mapping-entry" },
+          "minItems": 1,
+          "description": "Array of mappings to DataCite elements"
+        }
+      ],
+      "description": "Mapping to DataCite (https://schema.datacite.org/meta/kernel-4.7/metadata.xsd)"
+    },
     "dc": {
       "oneOf": [
         {
