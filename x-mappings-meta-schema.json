@@ -2,16 +2,35 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://quadriga-dk.github.io/quadriga-schema/x-mappings-meta-schema.json",
   "title": "QUADRIGA x-mappings Meta-Schema",
-  "description": "Meta-schema for validating x-mappings vocabulary crosswalk annotations in QUADRIGA JSON Schema files. The x-mappings extension documents how schema elements (properties or types) map to standard vocabularies (Dublin Core, DCAT, DCMI Terms, LRMI, Schema.org, Modalia, HERMES) using SKOS relationship types.",
+  "description": "Meta-schema for validating x-mappings vocabulary crosswalk annotations in QUADRIGA JSON Schema files. The x-mappings extension documents how schema elements (properties or types) map to standard vocabularies (AMB, Dublin Core, DCAT, DCMI Terms, LRMI, Schema.org, Modalia, HERMES) using SKOS relationship types.",
   "type": "object",
   "properties": {
     "$comment": {
       "type": "string",
       "description": "Optional comment explaining mapping decisions or providing additional context about the x-mappings in this schema"
     },
+    "amb": {
+      "oneOf": [
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
+        { "$ref": "#/$defs/mapping-entry" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/mapping-entry" },
+          "minItems": 1,
+          "description": "Array of mappings to AMB elements"
+        }
+      ],
+      "description": "Mapping to Allgemeines Metadatenprofil für Bildungsressourcen (https://dini-ag-kim.github.io/amb/latest/ bzw. https://dini-ag-kim.github.io/amb/draft/) "
+    },
     "dc": {
       "oneOf": [
-        { "type": "null", "description": "No mapping exists for this vocabulary" },
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
         { "$ref": "#/$defs/mapping-entry" },
         {
           "type": "array",
@@ -24,7 +43,10 @@
     },
     "dcat": {
       "oneOf": [
-        { "type": "null", "description": "No mapping exists for this vocabulary" },
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
         { "$ref": "#/$defs/mapping-entry" },
         {
           "type": "array",
@@ -37,7 +59,10 @@
     },
     "dcterms": {
       "oneOf": [
-        { "type": "null", "description": "No mapping exists for this vocabulary" },
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
         { "$ref": "#/$defs/mapping-entry" },
         {
           "type": "array",
@@ -50,7 +75,10 @@
     },
     "hermes": {
       "oneOf": [
-        { "type": "null", "description": "No mapping exists for this vocabulary" },
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
         { "$ref": "#/$defs/mapping-entry" },
         {
           "type": "array",
@@ -63,7 +91,10 @@
     },
     "lrmi": {
       "oneOf": [
-        { "type": "null", "description": "No mapping exists for this vocabulary" },
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
         { "$ref": "#/$defs/mapping-entry" },
         {
           "type": "array",
@@ -76,7 +107,10 @@
     },
     "modalia": {
       "oneOf": [
-        { "type": "null", "description": "No mapping exists for this vocabulary" },
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
         { "$ref": "#/$defs/mapping-entry" },
         {
           "type": "array",
@@ -89,7 +123,10 @@
     },
     "schema": {
       "oneOf": [
-        { "type": "null", "description": "No mapping exists for this vocabulary" },
+        {
+          "type": "null",
+          "description": "No mapping exists for this vocabulary"
+        },
         { "$ref": "#/$defs/mapping-entry" },
         {
           "type": "array",
