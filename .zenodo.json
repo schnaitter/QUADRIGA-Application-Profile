@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/zenodo/zenodo/482ee72ad501cbbd7f8ce8df9b393c130d1970f7/zenodo/modules/deposit/jsonschemas/deposits/records/legacyrecord.json",
-  "title": "QUADRIGA metadata schema",
-  "description": "Internal metadata schema for the OER authored in the QUADRIGA project. Use this schema to validate the metadata of QUADRIGA case studies. The schema provides mappings to other schemas and the relationship of those mappings is defined via SKOS relations. These mappings are defined in `x-mappings-meta-schema.json`.",
+  "title": "QUADRIGA Application Profile",
+  "description": "Internal application profile for the OER authored in the QUADRIGA project implemented in JSON-Schema. Use this QAP to validate the metadata of QUADRIGA case studies. The QAP provides mappings to other schemas and vocabularies and the relationship of those mappings is defined via SKOS relations. These mappings are defined in `x-mappings-meta-schema.json`.",
   "upload_type": "other",
   "publication_date": "2026-03-09",
   "creators": [
@@ -14,10 +14,6 @@
       "name": "Walter, Paul",
       "affiliation": "Fachhochschule Potsdam",
       "orcid": "0000-0002-9236-3268"
-    },
-    {
-      "name": "Schneemann, Carsten",
-      "orcid": "0000-0002-2683-5853"
     },
     {
       "name": "Neuroth, Heike",
@@ -36,14 +32,20 @@
   "communities": [{ "identifier": "quadriga" }],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/quadriga-dk/quadriga-schema",
+      "identifier": "https://github.com/quadriga-dk/QUADRIGA-Application-Profile",
       "relation": "isSupplementTo",
       "scheme": "url"
     },
     {
-      "identifier": "https://quadriga-dk.github.io/quadriga-schema/",
+      "identifier": "https://quadriga-dk.github.io/QUADRIGA-Application-Profile/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+        {
+      "identifier": "https://quadriga-dk.github.io/QUADRIGA-Application-Profile/latest/mapping-matrix.html",
       "relation": "isDocumentedBy",
       "scheme": "url"
     }
+
   ]
 }
